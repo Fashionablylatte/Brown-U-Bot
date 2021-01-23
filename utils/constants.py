@@ -1,0 +1,1 @@
+PVD_COVID_ENDPT = 'https://ri-department-of-health-covid-19-data-rihealth.hub.arcgis.com/'
