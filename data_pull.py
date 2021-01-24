@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import unicodedata
 
 from utils.constants import COVID_ENDPT
 
