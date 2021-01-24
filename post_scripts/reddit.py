@@ -16,6 +16,12 @@ def get_reddit_instance(config_filepath):
 
 
 def process_comment(comment, config_filepath):
+    """
+    Processes a Reddit comment.
+    :param comment: a PRAW comment object.
+    :param config_filepath: a config file of the format .ini
+    :return: a string message, or empty string, depending on if the message should trigger a response.
+    """
     if comment.author.name == cf.get_user(config_filepath):
         return ""
     elif check_keywords(comment.body):
@@ -37,11 +43,12 @@ def process_comment(comment, config_filepath):
         return ""
 
 
-def get_subreddit(config_filepath):
-    return cf.get_subreddit(config_filepath)
-
-
 def check_keywords(content):
+    """
+    Checks a message for any keywords.
+    :param content: the message to check.
+    :return: a boolean, True if there are any keywords.
+    """
     words = content.lower().split()
     for w in words:
         if w in constants.KEYWORDS:
