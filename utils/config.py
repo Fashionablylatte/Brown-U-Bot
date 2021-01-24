@@ -15,3 +15,10 @@ def get_oauth(file_path):
     user_agent = config['OAUTH']['user_agent']
     username = config['OAUTH']['username']
     return client_id, client_secret, password, user_agent, username
+
+
+def get_subreddit(file_path):
+    config = cp.ConfigParser()
+    config.read(file_path)
+    sub = config['OTHER']['subreddit']
+    return sub

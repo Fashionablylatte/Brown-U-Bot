@@ -1,5 +1,6 @@
 import praw
 import utils.config as cf
+import data_pull as dp
 
 
 def get_reddit_instance(config_filepath):
@@ -15,9 +16,19 @@ def get_reddit_instance(config_filepath):
 
 def process_comment(comment_body):
     if "!c19data" in comment_body:
-        return "Placeholder message."
+        tb = dp.pull("RI")
+        message = f"| | Total Deaths | Increase in Deaths | Infected | Increase in Infected |\n" \
+                  f"| --- | --- | --- | --- | --- |\n" \
+                  f"| Current | {tb['total_deaths']} | {tb['inc_deaths']} | {tb['infected']} " \
+                  f"| {tb['inc_infected']} |\n"\
+                  f"| 5 Day | {tb['5_day_deaths']}|{tb['5_day_inc_deaths']}|{tb['5_day_infected']}" \
+                  f"|{tb['5_day_inc_infected']}|\n" \
+                  f"| 10 Day | {tb['10_day_deaths']}|{tb['10_day_inc_deaths']}|{tb['10_day_infected']}" \
+                  f"|{tb['10_day_inc_infected']}|"
+        return message
     else:
         return ""
 
 
-
+def get_subreddit(config_filepath):
+    return cf.get_subreddit(config_filepath)
