@@ -1,14 +1,19 @@
 import post_scripts.reddit as rd
+import utils.config as cf
 from utils.constants import CONFIG_FILEPATH
 import praw
 import time
 
 
 def main():
+    """
+    Runs the bot in a loop. Sleeps on a rate request request, exits on other exceptions.
+    :return: None
+    """
     while True:
         try:
             reddit = rd.get_reddit_instance(CONFIG_FILEPATH)
-            subreddit = reddit.subreddit(rd.get_subreddit(CONFIG_FILEPATH))
+            subreddit = reddit.subreddit(cf.get_subreddit(CONFIG_FILEPATH))
             for comment in subreddit.stream.comments(skip_existing=True):
                 resp = rd.process_comment(comment, CONFIG_FILEPATH)
                 if resp != "":
