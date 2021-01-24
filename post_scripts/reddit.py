@@ -2,6 +2,7 @@ import praw
 import utils.config as cf
 import data_pull as dp
 import utils.constants as constants
+import string
 
 
 def get_reddit_instance(config_filepath):
@@ -49,7 +50,7 @@ def check_keywords(content):
     :param content: the message to check.
     :return: a boolean, True if there are any keywords.
     """
-    words = content.lower().split()
+    words = content.lower().translate(str.maketrans('', '', string.punctuation)).makesplit()
     for w in words:
         if w in constants.KEYWORDS:
             return True
