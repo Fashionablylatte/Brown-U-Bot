@@ -19,4 +19,6 @@ web = some_value
 
 Please see https://www.reddit.com/dev/api and https://praw.readthedocs.io/en/latest/ for more information. 
 
+https://fashionablylatte.github.io/Brown-U-Bot/ For future updates or to give feedback.
+
 Created by Steven Cheung and Joe Han for Hack@Brown 2021. 
