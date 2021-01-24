@@ -1,1 +1,1 @@
-PVD_COVID_ENDPT = 'https://ri-department-of-health-covid-19-data-rihealth.hub.arcgis.com/'
+COVID_ENDPT = 'https://api.covidtracking.com/v1/states/'
