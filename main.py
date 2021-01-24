@@ -25,6 +25,7 @@ def main():
                     for t in subexec.message.split():
                         try:
                             stime = int(t)
+                            print(f"sleeping for {stime * 60} seconds.")
                             time.sleep(stime * 60)
                             break
                         except ValueError:
