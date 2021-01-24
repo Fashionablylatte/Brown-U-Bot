@@ -50,7 +50,7 @@ def check_keywords(content):
     :param content: the message to check.
     :return: a boolean, True if there are any keywords.
     """
-    words = content.lower().translate(str.maketrans('', '', string.punctuation)).makesplit()
+    words = content.lower().translate(str.maketrans('', '', string.punctuation)).split()
     for w in words:
         if w in constants.KEYWORDS:
             return True
