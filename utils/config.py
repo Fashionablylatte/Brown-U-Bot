@@ -3,7 +3,7 @@ import configparser as cp
 
 def get_oauth(file_path):
     """
-    Gets the oauth information from the configuration files.
+    Gets the oauth information from the configuration file.
     :param file_path: a config file of the format .ini
     :return: the oauth requirements as a n-tuple.
     """
@@ -18,6 +18,11 @@ def get_oauth(file_path):
 
 
 def get_subreddit(file_path):
+    """
+    Gets the subreddit parameter from the configuration file.
+    :param file_path: a config file of the format .ini
+    :return: the subreddit as a string.
+    """
     config = cp.ConfigParser()
     config.read(file_path)
     sub = config['OTHER']['subreddit']
@@ -25,6 +30,11 @@ def get_subreddit(file_path):
 
 
 def get_state(file_path):
+    """
+    Gets the state parameter from the configuration file.
+    :param file_path: a config file of the format .ini
+    :return: the US state abbreviation as a string.
+    """
     config = cp.ConfigParser()
     config.read(file_path)
     st = config['OTHER']['state']
@@ -33,6 +43,11 @@ def get_state(file_path):
 
 
 def get_user(file_path):
+    """
+    Gets the username parameter from the configuration file.
+    :param file_path: a config file of the format .ini
+    :return: the username as a string.
+    """
     config = cp.ConfigParser()
     config.read(file_path)
     un = config['OAUTH']['username']

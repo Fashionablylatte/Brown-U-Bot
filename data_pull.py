@@ -12,7 +12,7 @@ def rolling_average(n, data):
     @return: the n day death, death increase, infected, and infected increase averages
     """
     # 10 day rolling average data 
-    death_total, inc_death_total, inf_total, inc_inf_total = 0,0,0,0
+    death_total, inc_death_total, inf_total, inc_inf_total = 0, 0, 0, 0
     for i in range(n): 
         curr = data[i]
 
