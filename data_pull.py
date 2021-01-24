@@ -11,8 +11,11 @@ def rolling_average(n, data):
     @param data: a list of dictionaries representing covid data pts
     @return: the n day death, death increase, infected, and infected increase averages
     """
-    # 10 day rolling average data 
-    death_total, inc_death_total, inf_total, inc_inf_total = 0, 0, 0, 0
+
+    # 10 day rolling average data
+    death_total, inc_death_total, inf_total, inc_inf_total = 0,0,0,0
+
+    # Get the last n days and add to total counters
     for i in range(n): 
         curr = data[i]
 
@@ -21,10 +24,18 @@ def rolling_average(n, data):
         inf_total += curr['positive']
         inc_inf_total += curr['positiveIncrease']
 
+    # Divide total counters by n to get n-day average
     return death_total/n, inc_death_total/n, inf_total/n, inc_inf_total/n
 
 
 def pull(state): 
+    """
+    Function to pull data from covidtracking api. 
+    @param state: a str representing the abbreviation of the state we want to 
+                    pull data from 
+    @return: a dict containing the daily, 5 day, and 10 day averages for total 
+                deaths, increase in deaths, total infected, and daily infected
+    """
     url = COVID_ENDPT + state + '/daily.json'
     r = requests.get(url)
 
