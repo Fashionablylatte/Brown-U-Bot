@@ -13,7 +13,7 @@ def rolling_average(n, data):
     """
     # 10 day rolling average data 
     death_total, inc_death_total, inf_total, inc_inf_total = 0,0,0,0
-    for i in range(len(n)): 
+    for i in range(n): 
         curr = data[i]
 
         death_total += curr['death']
@@ -44,9 +44,9 @@ def pull(state):
         # 10 day avg
         result['10_day_deaths'], result['10_day_inc_deaths'], \
             result['10_day_infected'], result['10_day_inc_infected'] \
-                = rolling_average(10 data)
+                = rolling_average(10, data)
         
     return result
     
 if __name__ == '__main__': 
-    pull('AK')
+    print(pull('AK'))
