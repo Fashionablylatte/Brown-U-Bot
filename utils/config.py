@@ -22,3 +22,18 @@ def get_subreddit(file_path):
     config.read(file_path)
     sub = config['OTHER']['subreddit']
     return sub
+
+
+def get_state(file_path):
+    config = cp.ConfigParser()
+    config.read(file_path)
+    st = config['OTHER']['state']
+    web = config['OTHER']['web']
+    return st, web
+
+
+def get_user(file_path):
+    config = cp.ConfigParser()
+    config.read(file_path)
+    un = config['OAUTH']['username']
+    return un
