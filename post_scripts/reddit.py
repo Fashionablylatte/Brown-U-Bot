@@ -1,6 +1,7 @@
 import praw
 import utils.config as cf
 import data_pull as dp
+import utils.constants as constants
 
 
 def get_reddit_instance(config_filepath):
@@ -14,17 +15,23 @@ def get_reddit_instance(config_filepath):
     return reddit
 
 
-def process_comment(comment_body):
-    if "!c19data" in comment_body:
-        tb = dp.pull("RI")
-        message = f"| | Total Deaths | Increase in Deaths | Infected | Increase in Infected |\n" \
+def process_comment(comment, config_filepath):
+    if comment.author.name == cf.get_user(config_filepath):
+        return ""
+    elif check_keywords(comment.body):
+        state, state_web = cf.get_state(config_filepath)
+        tb = dp.pull(state)
+        message = f"## Cumulative Covid-19 Statistics for {state}\n" \
+                  f"| | Total Deaths | Increase in Deaths | Infected | Increase in Infected |\n" \
                   f"| --- | --- | --- | --- | --- |\n" \
                   f"| Current | {tb['total_deaths']} | {tb['inc_deaths']} | {tb['infected']} " \
                   f"| {tb['inc_infected']} |\n"\
                   f"| 5 Day | {tb['5_day_deaths']}|{tb['5_day_inc_deaths']}|{tb['5_day_infected']}" \
                   f"|{tb['5_day_inc_infected']}|\n" \
                   f"| 10 Day | {tb['10_day_deaths']}|{tb['10_day_inc_deaths']}|{tb['10_day_infected']}" \
-                  f"|{tb['10_day_inc_infected']}|"
+                  f"|{tb['10_day_inc_infected']}|\n" \
+                  f"### Please stay safe by exercising sound judgement and following all health authority advisories! "\
+                  f"For more information, see [{state_web}]({state_web}). Note that all data may be provisional."
         return message
     else:
         return ""
@@ -32,3 +39,11 @@ def process_comment(comment_body):
 
 def get_subreddit(config_filepath):
     return cf.get_subreddit(config_filepath)
+
+
+def check_keywords(content):
+    words = content.lower().split()
+    for w in words:
+        if w in constants.KEYWORDS:
+            return True
+    return False
